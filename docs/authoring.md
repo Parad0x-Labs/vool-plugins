@@ -192,6 +192,9 @@ enabled after accepting access
 
 ### 8. Install it in VOOL
 
+Plugin tools are offered in chats only while VOOL's plugin-tools switch is on. Start VOOL with
+`VOOL_PLUGIN_RUNTIME_TOOLS=1` set. Model provider and scanner plugins work without it.
+
 1. Open **Add-ons → My add-ons → Plugins**.
 2. Under **Install from a folder**, enter the folder path and choose **Review folder**.
 3. Read the file list, then choose **Install and keep disabled**.
@@ -429,6 +432,9 @@ A tool that changes workspace files also declares how VOOL records and undoes th
 - On macOS, VOOL starts a private proxy for that one call and points `HTTPS_PROXY` at it. The sandbox allows that
   proxy and nothing else, and the proxy connects only to your declared hosts. Use an HTTP client that honours
   `HTTPS_PROXY`. Direct sockets are refused.
+- The proxy reads the TLS greeting and refuses the connection unless the server name in it is the declared
+  host you asked for. Standard HTTPS clients do this already. One connection carries at most 64 MB in both
+  directions together; open a new connection for more.
 - On Linux and in the isolated container the program cannot reach that proxy, so it runs with no network. The
   access sheet tells the person so. Design your tool to fail with a clear `error` when it is offline.
 - Model provider and scanner requests are made by VOOL itself, to declared hosts only, on every platform.
@@ -456,6 +462,8 @@ A tool that changes workspace files also declares how VOOL records and undoes th
 | Installs and updates start switched off | Nothing runs until the person has read the access sheet. |
 | No auto-enable or autostart | Same reason. |
 | Exact network hosts only | The person sees every place the plugin can reach. |
+| The TLS server name must be the declared host | A plugin cannot reach another site that shares the declared host's address. |
+| `vool-plugin-usepod` and `vool-plugin-eyebrow` are reserved for VOOL's own packages | Those ids are trusted with the payment lane and the saved scanner key, so VOOL checks the exact bytes, not the name. |
 | No runtime downloads | The code that runs is the code that was reviewed. |
 | Changed files switch the plugin off | Same reason. |
 | No plugins in remote or phone turns | Those turns never use the owner's keys or tools that can act. |
@@ -524,6 +532,7 @@ VOOL refuses a plugin with a plain message. Messages about one tool start with i
 | handler did not emit one JSON object on stdout | Print exactly one JSON object and nothing else to standard output. Send logs to standard error. |
 | exit N: ... | Your program exited with an error. The text after the colon is the start of its standard error. |
 | handler exceeded ...s | Make the call faster or raise `timeout_seconds`, up to 300. |
+| This plugin name belongs to a plugin made by VOOL. | Change `name` and `vool.id` to your own id. |
 | This service is paid from a balance VOOL spends only with your wallet approvals | Such a service cannot be used from a plugin. |
 | cannot keep private (macOS) | An MCP server that takes keys from its environment needs VOOL's isolated container on a Mac. Use a plain program, which reads keys from standard input. |
 
