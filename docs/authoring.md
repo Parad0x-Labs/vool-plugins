@@ -192,8 +192,8 @@ enabled after accepting access
 
 ### 8. Install it in VOOL
 
-Plugin tools are offered in chats only while VOOL's plugin-tools switch is on. Start VOOL with
-`VOOL_PLUGIN_RUNTIME_TOOLS=1` set. Model provider and scanner plugins work without it.
+Plugin tools are offered in chats only while **Let chats use plugin tools** is on, in the same Plugins
+section. It is off by default. Model provider and scanner plugins work either way.
 
 1. Open **Add-ons → My add-ons → Plugins**.
 2. Under **Install from a folder**, enter the folder path and choose **Review folder**.
