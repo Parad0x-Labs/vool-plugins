@@ -42,7 +42,8 @@ now, so they can be reviewed against the 0.8 rules.
 
 Raise the version in all four places: both `version` fields in `.codex-plugin/plugin.json`, and the `version`
 in `.claude-plugin/plugin.json` and in `CHANGELOG.md`. People who update get the plugin switched off until
-they review its access again.
+they review its access again. Publish updates from the same repository and under the same `publisher`:
+an update from anywhere else does not keep people's saved keys.
 
 ## Reference plugins
 

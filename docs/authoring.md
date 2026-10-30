@@ -264,10 +264,11 @@ example.
 
 - `command` is a path inside your folder. Runtime fetchers such as `npx` and `uvx` are refused, because they
   download code that nobody reviewed.
-- `args` cannot expand environment variables.
+- `args` cannot expand environment variables. A path in `args` is passed to your program but never made
+  readable; keep every file your server reads inside your folder.
 - `env` may only pass your own declared keys, written as `"NAME": "${NAME}"`.
 - Each MCP tool must name its server and tool, and should pin its effect class and permissions under `trust`.
-  An unpinned tool asks for explicit approval every time it runs.
+  An unpinned tool asks for approval every time it runs in Manual mode and does not run in Auto mode.
 - Add a `.mcp.json` file with the same `command`, `args` and `env`, so other apps that read `.mcp.json` start it
   the same way. `scripts/check.py` checks that the two match.
 
@@ -357,7 +358,7 @@ Handler fields:
 | --- | --- | --- |
 | `kind` | both | `subprocess` or `mcp` |
 | `entry` | subprocess | Program path inside your folder |
-| `args` | subprocess | Fixed arguments |
+| `args` | subprocess | Fixed arguments. Paths here are not made readable |
 | `timeout_seconds` | both | Up to 300 |
 | `network` | subprocess | `true` to use your declared hosts; see [Network](#network) |
 | `env_allowlist` | subprocess | Key names from `credentials` that this tool receives |
@@ -414,11 +415,11 @@ A tool that changes workspace files also declares how VOOL records and undoes th
 - A plain program gets a key only when that tool lists its `env` name in `handler.env_allowlist`. The key arrives
   in `context.credentials` on standard input. Read it from there, because that works on every platform.
 - On Linux the key is also set as an environment variable of that name. On macOS it never is: any program
-  of the same user can read another program's starting environment there, and the macOS sandbox cannot
-  stop that.
+  of the same user that runs outside the sandbox can read another program's starting environment there.
 - An MCP server gets its keys only as environment variables, through `env`. On macOS such a server runs only in
-  VOOL's optional isolated container. Without it, VOOL keeps the plugin off and says why. An MCP server that
-  needs no key runs normally.
+  VOOL's optional isolated container. The keys travel into the container on the server's input and become
+  environment variables only inside it. Without the container, VOOL keeps the plugin off and says why. An MCP
+  server that needs no key runs normally.
 - VOOL removes key values from everything your program returns.
 - Keys that VOOL kept from an older built-in service setting are used only by VOOL's own requests and are never
   handed to plugin code.
@@ -446,7 +447,11 @@ A tool that changes workspace files also declares how VOOL records and undoes th
 - Bundle everything your code needs: source, dependencies and lock files. Nothing is downloaded at run time.
 - Each call checks that the plugin is enabled and that its files still match the reviewed digest. Changed bytes
   switch it off.
-- Disable stops running calls, and late results are dropped.
+- Disable stops running calls, and late results are dropped. Turning a plugin off in the Plugins panel does the
+  same and withdraws its consent.
+- On macOS the sandbox refuses reading another program's arguments and starting environment.
+- An update from another repository or publisher does not keep the saved keys. People save them again after
+  reviewing the update.
 - Packages are limited to 4096 files, 64 MB per file and 128 MB in total. Symbolic links and nested git
   repositories are refused.
 - Python programs in the isolated container use its interpreter. Other bundled programs must run on Linux on the
