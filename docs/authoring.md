@@ -415,7 +415,8 @@ A tool that changes workspace files also declares how VOOL records and undoes th
 - A plain program gets a key only when that tool lists its `env` name in `handler.env_allowlist`. The key arrives
   in `context.credentials` on standard input. Read it from there, because that works on every platform.
 - On Linux the key is also set as an environment variable of that name. On macOS it never is: any program
-  of the same user that runs outside the sandbox can read another program's starting environment there.
+  of the same user, plugin code included, can read another program's starting environment there, and the
+  macOS sandbox cannot stop that.
 - An MCP server gets its keys only as environment variables, through `env`. On macOS such a server runs only in
   VOOL's optional isolated container. The keys travel into the container on the server's input and become
   environment variables only inside it. Without the container, VOOL keeps the plugin off and says why. An MCP
@@ -449,7 +450,6 @@ A tool that changes workspace files also declares how VOOL records and undoes th
   switch it off.
 - Disable stops running calls, and late results are dropped. Turning a plugin off in the Plugins panel does the
   same and withdraws its consent.
-- On macOS the sandbox refuses reading another program's arguments and starting environment.
 - An update from another repository or publisher does not keep the saved keys. People save them again after
   reviewing the update.
 - Packages are limited to 4096 files, 64 MB per file and 128 MB in total. Symbolic links and nested git
