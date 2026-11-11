@@ -84,11 +84,25 @@ def check(folder: Path) -> dict:
     return {"id": plugin.plugin_id, "version": plugin.version, "digest": identity.digest}
 
 
+NO_PLUGIN_SYSTEM = (
+    "This VOOL checkout has no plugin system: {source}\n"
+    "Plugins are planned for VOOL 0.8 and are not in a VOOL release or on its main branch yet, "
+    "so there is nothing here to {verb} against. Nothing was run."
+)
+
+
+def require_plugin_system(source: Path, verb: str) -> None:
+    """Stop with a plain sentence when the checkout predates the plugin system."""
+    if not (source / "core/plugin_manager.py").is_file():
+        raise SystemExit(NO_PLUGIN_SYSTEM.format(source=source, verb=verb))
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--vool-source", type=Path, required=True, help="a VOOL source checkout with the plugin system")
     parser.add_argument("folders", nargs="*", type=Path, help="plugin folders to check (default: all in this repository)")
     options = parser.parse_args()
+    require_plugin_system(options.vool_source.resolve(), "check")
     sys.path.insert(0, str(options.vool_source.resolve()))
     try:
         import core.plugin_tools  # noqa: F401

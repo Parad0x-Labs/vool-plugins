@@ -26,7 +26,8 @@ You need:
 
 - Python 3 for the check script and the examples.
 - A VOOL source checkout that includes the plugin system, for `scripts/check.py` and for installing your plugin
-  in a real VOOL. The plugin system first ships in VOOL 0.8 (planned, not released yet).
+  in a real VOOL. The plugin system first ships in VOOL 0.8 (planned, not released yet). It is not in a VOOL
+  release or on VOOL's main branch yet; against those the scripts stop with a message.
 - Any language for your own tool code, as long as it runs as a program bundled in your folder.
 
 Pick the kind you need:

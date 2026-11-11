@@ -18,6 +18,19 @@ import tempfile
 from pathlib import Path
 
 
+NO_PLUGIN_SYSTEM = (
+    "This VOOL checkout has no plugin system: {source}\n"
+    "Plugins are planned for VOOL 0.8 and are not in a VOOL release or on its main branch yet, "
+    "so there is nothing here to {verb} against. Nothing was run."
+)
+
+
+def require_plugin_system(source: Path, verb: str) -> None:
+    """Stop with a plain sentence when the checkout predates the plugin system."""
+    if not (source / "core/plugin_manager.py").is_file():
+        raise SystemExit(NO_PLUGIN_SYSTEM.format(source=source, verb=verb))
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--vool-source", type=Path, required=True, help="a VOOL source checkout with the plugin system")
@@ -29,6 +42,7 @@ def main():
     folder = options.folder.resolve()
     arguments = json.loads(options.arguments)
     source = options.vool_source.resolve()
+    require_plugin_system(source, "try a plugin")
 
     scratch = Path(tempfile.mkdtemp(prefix="vool-plugin-try-"))
     os.environ.update(VOOL_HOME=str(scratch / "profile"), VOOL_PLUGIN_LIFECYCLE_PATH=str(scratch / "lifecycle.json"),

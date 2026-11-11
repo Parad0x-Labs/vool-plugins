@@ -72,7 +72,8 @@ To run a tool once in a throwaway VOOL profile, use `scripts/try.py`; see
 
 The check uses the manifest validator and package capture from a VOOL source checkout, so this repository
 keeps no second copy of those rules. It reads files only and runs no plugin code. The plugin system first
-ships in VOOL 0.8 (planned, not released yet), so the checkout must include it.
+ships in VOOL 0.8 (planned, not released yet). It is not in a VOOL release or on VOOL's main branch yet, so
+against those the scripts stop with a message and check nothing.
 
 ## Licence
 
