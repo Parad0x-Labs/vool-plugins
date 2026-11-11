@@ -39,7 +39,9 @@ def check(folder: Path) -> dict:
         raise Problem('the manifest needs a "vool" block with id, version and access declarations')
     try:
         identity = capture_package(folder)
-    except (ValueError, OSError) as exc:
+    except (ValueError, OSError, RuntimeError) as exc:
+        # A linked file, a device file or an embedded project: VOOL refuses the whole package
+        # for it, so the checker says so instead of stopping with a Python error.
         raise Problem(str(exc)) from None
     for name in ("README.md", "LICENSE", "CHANGELOG.md"):
         path = folder / name

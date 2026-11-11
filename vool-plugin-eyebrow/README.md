@@ -12,7 +12,7 @@ safety guarantee.
 
 ## Set up
 
-1. Install the folder from **Add-ons → My add-ons → Plugins**. It installs switched off.
+1. Install the folder from **Skills & Plugins → My add-ons → Plugins**. It installs switched off.
 2. Paste your Eyebrow key into the card and choose **Save key**. Get a key at https://eyebrow.cc/dashboard.
    If you saved an Eyebrow key in VOOL before plugins, enabling this plugin reuses it.
 3. Choose **Review access and enable**, then **Accept and enable**.

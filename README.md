@@ -1,6 +1,6 @@
 # VOOL plugins
 
-Plugins add tools and services to VOOL from the Add-ons page. A skill teaches VOOL a task in writing. A plugin
+Plugins add tools and services to VOOL from the Skills & Plugins page. A skill teaches VOOL a task in writing. A plugin
 brings code or a service connection that VOOL can call.
 
 > Plugins are planned for VOOL 0.8, not released yet. This repository holds the reference plugins and the
@@ -18,7 +18,7 @@ The service examples are written by VOOL. They are not endorsed by, or made with
 
 ## How a person uses a plugin
 
-1. In VOOL, open **Add-ons → My add-ons → Plugins** and choose **Install from a folder**.
+1. In VOOL, open **Skills & Plugins → My add-ons → Plugins** and choose **Install from a folder**.
 2. VOOL shows every file in the package. **Install and keep disabled** installs it switched off.
 3. If the plugin needs a service key, paste it into the plugin's card and choose **Save key**. Saving makes no
    request.

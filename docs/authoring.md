@@ -195,7 +195,7 @@ enabled after accepting access
 Plugin tools are offered in chats only while **Let chats use plugin tools** is on, in the same Plugins
 section. It is off by default. Model provider and scanner plugins work either way.
 
-1. Open **Add-ons → My add-ons → Plugins**.
+1. Open **Skills & Plugins → My add-ons → Plugins**.
 2. Under **Install from a folder**, enter the folder path and choose **Review folder**.
 3. Read the file list, then choose **Install and keep disabled**.
 4. Choose **Review access and enable**, read the access sheet, then **Accept and enable**.
