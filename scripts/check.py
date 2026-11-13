@@ -12,7 +12,7 @@ import os
 import sys
 from pathlib import Path
 
-REFERENCE = {"vool-plugin-template", "vool-plugin-usepod", "vool-plugin-eyebrow"}
+REFERENCE = {"vool-plugin-template"}
 
 
 class Problem(Exception):

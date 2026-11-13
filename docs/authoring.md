@@ -193,7 +193,7 @@ enabled after accepting access
 ### 8. Install it in VOOL
 
 Plugin tools are offered in chats only while **Let chats use plugin tools** is on, in the same Plugins
-section. It is off by default. Model provider and scanner plugins work either way.
+section. It is on until the person turns it off. Model provider and scanner plugins work either way.
 
 1. Open **Add-ons → My add-ons → Plugins**.
 2. Under **Install from a folder**, enter the folder path and choose **Review folder**.
@@ -468,7 +468,7 @@ A tool that changes workspace files also declares how VOOL records and undoes th
 | No auto-enable or autostart | Same reason. |
 | Exact network hosts only | The person sees every place the plugin can reach. |
 | The TLS server name must be the declared host | A plugin cannot reach another site that shares the declared host's address. |
-| `vool-plugin-usepod` and `vool-plugin-eyebrow` are reserved for VOOL's own packages | Those ids are trusted with the payment lane and the saved scanner key, so VOOL checks the exact bytes, not the name. |
+| `vool-plugin-usepod` and `vool-plugin-eyebrow` are reserved | They belonged to the retired UsePod and Eyebrow services, so VOOL refuses another package that claims one. |
 | No runtime downloads | The code that runs is the code that was reviewed. |
 | Changed files switch the plugin off | Same reason. |
 | No plugins in remote or phone turns | Those turns never use the owner's keys or tools that can act. |

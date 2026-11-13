@@ -45,7 +45,6 @@ in `.claude-plugin/plugin.json` and in `CHANGELOG.md`. People who update get the
 they review its access again. Publish updates from the same repository and under the same `publisher`:
 an update from anywhere else does not keep people's saved keys.
 
-## Reference plugins
+## Reference template
 
-`template/`, `vool-plugin-usepod/` and `vool-plugin-eyebrow/` are maintained by the VOOL team. Changes to them
-follow the same steps.
+`template/` is maintained by the VOOL team. Changes to it follow the same steps.

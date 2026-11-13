@@ -3,7 +3,7 @@
 Plugins add tools and services to VOOL from the Add-ons page. A skill teaches VOOL a task in writing. A plugin
 brings code or a service connection that VOOL can call.
 
-> Plugins are planned for VOOL 0.8, not released yet. This repository holds the reference plugins and the
+> Plugins are planned for VOOL 0.8, not released yet. This repository holds the reference template and the
 > rules 0.8 is built to. Details may still change before the release.
 
 ## What a plugin can be
@@ -11,10 +11,10 @@ brings code or a service connection that VOOL can call.
 | Kind | What it adds | Example in this repository |
 | --- | --- | --- |
 | `tools` | Tools VOOL can call in a chat, run from code bundled in the plugin. | [`template/`](template/) |
-| `model_provider` | A model service that speaks the OpenAI chat format. VOOL makes the requests itself; the plugin is data only. | [`vool-plugin-usepod/`](vool-plugin-usepod/) |
-| `scanner` | An extra security scan of public add-on content before it is installed. VOOL makes the requests itself. | [`vool-plugin-eyebrow/`](vool-plugin-eyebrow/) |
+| `model_provider` | A model service that speaks the OpenAI chat format. VOOL makes the requests itself; the plugin is data only. | None. See [Model providers and scanners](docs/authoring.md#model-providers-and-scanners). |
+| `scanner` | An extra security scan of public add-on content before it is installed. VOOL makes the requests itself. | None. See [Model providers and scanners](docs/authoring.md#model-providers-and-scanners). |
 
-The service examples are written by VOOL. They are not endorsed by, or made with, the named services.
+VOOL offers no model provider or scanner plugin of its own. A service brings its own plugin.
 
 ## How a person uses a plugin
 
